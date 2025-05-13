@@ -1,0 +1,67 @@
+# Base class
+class Smartphone:
+    def __init__(self, brand, model, storage, battery):
+        self.brand = brand
+        self.model = model
+        self.storage = storage  # in GB
+        self.battery = battery  # in mAh
+        self.__is_on = False  # private attribute (encapsulation)
+
+    def power_on(self):
+        if not self.__is_on:
+            self.__is_on = True
+            print(f"{self.brand} {self.model} is now ON.")
+        else:
+            print(f"{self.brand} {self.model} is already ON.")
+
+    def power_off(self):
+        if self.__is_on:
+            self.__is_on = False
+            print(f"{self.brand} {self.model} is now OFF.")
+        else:
+            print(f"{self.brand} {self.model} is already OFF.")
+
+    def get_status(self):
+        return "ON" if self.__is_on else "OFF"
+
+    def specs(self):
+        print(f"Brand: {self.brand}\nModel: {self.model}\nStorage: {self.storage}GB\nBattery: {self.battery}mAh")
+
+
+# Subclass: GamingPhone (Polymorphism)
+class GamingPhone(Smartphone):
+    def __init__(self, brand, model, storage, battery, refresh_rate):
+        super().__init__(brand, model, storage, battery)
+        self.refresh_rate = refresh_rate  # in Hz
+
+    def specs(self):
+        super().specs()
+        print(f"Refresh Rate: {self.refresh_rate}Hz - Great for gaming!")
+
+
+# Subclass: CameraPhone (Polymorphism)
+class CameraPhone(Smartphone):
+    def __init__(self, brand, model, storage, battery, camera_megapixels):
+        super().__init__(brand, model, storage, battery)
+        self.camera_megapixels = camera_megapixels  # in MP
+
+    def specs(self):
+        super().specs()
+        print(f"Camera: {self.camera_megapixels}MP - Perfect for photography!")
+
+
+# Example usage
+phone1 = Smartphone("Generic", "One", 64, 4000)
+phone2 = GamingPhone("Razor", "GamerX", 128, 5000, 144)
+phone3 = CameraPhone("Pixel", "7 Pro", 256, 4500, 108)
+
+phone1.power_on()
+phone1.specs()
+print()
+
+phone2.power_on()
+phone2.specs()
+print()
+
+phone3.power_on()
+phone3.specs()
